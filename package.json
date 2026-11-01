@@ -1,0 +1,29 @@
+{
+  "name": "fa-performance",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Farm Alert Performance App: staff phone app and admin, on the shared Performance System data.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "node --test scripts/core.test.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@supabase/supabase-js": "2.110.7",
+    "exceljs": "4.4.0",
+    "next": "16.2.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "server-only": "0.0.1",
+    "web-push": "3.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.10",
+    "tailwindcss": "4.3.3"
+  }
+}

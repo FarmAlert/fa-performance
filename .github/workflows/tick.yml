@@ -1,0 +1,31 @@
+name: Performance tick (manual fallback)
+
+# The app's scheduled jobs (day plans, auto-ticks, reminders, score
+# rebuilds, Day 1 / Day 3 / Day 5 month jobs) run from one endpoint called
+# every 15 minutes by the VPS crontab:
+#
+#   */15 * * * * curl -fsS -X POST -H "x-cron-secret: $CRON_SECRET" https://<app address>/api/cron/tick
+#
+# This workflow is a manual fallback and smoke test. Needs repo variable
+# APP_URL and secret CRON_SECRET.
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "Force one job (blank = normal tick)"
+        required: false
+        default: ""
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call tick
+        env:
+          JOB: ${{ github.event.inputs.job }}
+          APP_URL: ${{ vars.APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          URL="$APP_URL/api/cron/tick"
+          if [ -n "$JOB" ]; then URL="$URL?job=$JOB"; fi
+          curl --fail --silent --show-error -X POST -H "x-cron-secret: $CRON_SECRET" "$URL"

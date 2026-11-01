@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Admin colours: the build spec's tokens (teal #0D3B4F, green #2ECC52),
+   exposed under the same utility names the setup screens use. */
+@theme {
+  --color-navy: #0d3b4f;
+  --color-green: #2ecc52;
+}
+
+body {
+  font-size: 15px;
+  background: #f3f6f7;
+  color: #14262e;
+}
